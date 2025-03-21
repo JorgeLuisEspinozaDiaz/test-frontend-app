@@ -1,0 +1,141 @@
+<div>
+  <h1 style="font-weight: 600">Lista de Campañas</h1>
+  <span>Gestiona y monitorea tu campañas de marketing</span>
+
+  <div class="d-flex align-items-end justify-content-between mt-2">
+    <div class="justify-content-start gap-4 d-flex">
+      <div class="mt-2">
+        <label for="fechaInicio" class="form-label small-text"
+          >Fecha Inicio:</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          style="max-width: 200px"
+          id="fechaInicio"
+          name="fechaInicio"
+          [(ngModel)]="startDate"
+          (change)="onDateChange()"
+        />
+      </div>
+
+      <div class="mt-2">
+        <label for="fechaFinal" class="form-label small-text"
+          >Fecha Final:</label
+        >
+        <input
+          type="date"
+          class="form-control"
+          style="max-width: 200px"
+          id="fechaFinal"
+          name="fechaFinal"
+          [(ngModel)]="endDate"
+          (change)="onDateChange()"
+        />
+      </div>
+      <div class="d-flex align-items-end">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="filterCampaigns()"
+        >
+          Filtrar
+        </button>
+      </div>
+      <div class="d-flex align-items-end">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="resetearCampaigns()"
+        >
+          Resetear
+        </button>
+      </div>
+    </div>
+
+    <div>
+      <button type="button" class="btn btn-primary" (click)="openModal()">
+        <i class="fa-solid fa-xmark" style="transform: rotate(45deg); padding-right: .1rem;"></i>
+        Agregar
+      </button>
+    </div>
+  </div>
+
+  <table class="table table-hover mt-2">
+    <thead>
+      <tr>
+        <th scope="col" class="small-text">#</th>
+        <th scope="col" class="small-text">Nombre</th>
+        <th scope="col" class="small-text" colspan="2">
+          Fecha de Procesamiento
+        </th>
+        <th scope="col" class="small-text" colspan="2">
+          Hora de Procesamiento
+        </th>
+        <th scope="col" class="small-text">Estado del Proceso</th>
+        <th scope="col" class="small-text">Lista de Teléfonos</th>
+        <th scope="col" class="small-text">Mensaje de Texto</th>
+        <th scope="col" class="small-text">Mensajes</th>
+        <th scope="col" class="small-text">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of campaigns; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td class="small-text">
+          <strong>{{ item.campaign_name }}</strong
+          ><br />
+          <span style="color: gray; font-size: 0.9em"
+            >usuario: {{ item.user_name }}</span
+          >
+        </td>
+        <td class="small-text" colspan="2">{{ item.campaign_process_date }}</td>
+        <td class="small-text" colspan="2">{{ item.campaign_process_hour }}</td>
+        <td class="small-text">
+          <span [ngClass]="getStatusClass(item.process_status)">
+            {{ item.process_status }}
+          </span>
+        </td>
+        <td class="small-text">{{ item.campaign_phone_list }}</td>
+        <td class="small-text">{{ item.campaign_message_text }}</td>
+        <td class="small-text" (click)="openModalDetalle(item.campaign_id)">
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+            "
+          >
+            <i class="fa-solid fa-bars"></i>
+          </div>
+        </td>
+
+        <td>
+          <div
+            class="form-check"
+            *ngIf="item.campaign_process_status !== 3; else notificadoTemplate"
+          >
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="checkbox-{{ i }}"
+              [checked]="item.campaign_process_status === 3"
+              [disabled]="item.campaign_process_status === 3"
+              (change)="confirmSendCampaign($event, item)"
+            />
+            <!-- [(ngModel)]="item.notify" -->
+            <label style="cursor: pointer;" class="form-check-label small-text" for="checkbox-{{ i }}">
+              Notificar
+            </label>
+          </div>
+          <ng-template #notificadoTemplate>
+            <strong class="text-success small-text">Notificado</strong>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-campaign-form (campaignCreated)="fetchCampaigns()"></app-campaign-form>
+  <app-message-list [idDetalleMessage]="idDetalleMessage"></app-message-list>
+</div>

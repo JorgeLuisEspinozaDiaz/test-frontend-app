@@ -1,0 +1,46 @@
+<!-- Modal -->
+<div class="modal fade" id="myModaldetail" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Mensajes</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <div class="modal-body d-flex flex-column gap-1">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" class="small-text">#</th>
+              <th scope="col" class="small-text">Teléfono</th>
+              <th scope="col" class="small-text">Fecha de Procesamiento</th>
+              <th scope="col" class="small-text">Hora de Procesamiento</th>
+              <th scope="col" class="small-text">Estado</th>
+              <th scope="col" class="small-text">Mensaje de Texto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="messages.length === 0">
+              <td colspan="6" class="text-center text-muted">No hay datos disponibles</td>
+            </tr>
+            <tr *ngFor="let item of messages; let i = index">
+              <th scope="row">{{ i + 1 }}</th>
+              <td class="small-text">{{ item.message_phone }}</td>
+              <td class="small-text">{{ item.message_process_date }}</td>
+              <td class="small-text">{{ item.message_process_hour }}</td>
+              <td class="small-text">
+                <span  [ngClass]="getStatusClass(item.message_shipping_status)">
+                  {{ item.message_shipping_status }}
+              </span>
+              <td class="small-text">{{ item.message_text }}</td>
+
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn  btn-danger" (click)="closeModal()">Cerrar</button>
+       </div>
+    </div>
+  </div>
+</div>

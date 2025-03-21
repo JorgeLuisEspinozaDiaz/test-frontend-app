@@ -1,0 +1,29 @@
+.small-text {
+  font-size: 12px;
+ }
+
+
+ .estado {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  min-width: 100px;
+}
+
+.finalizado {
+  background-color: #EADCFB;
+  color: #7D3C98;
+}
+
+.en-proceso {
+  background-color: #D6EAF8;
+  color: #21618C;
+}
+
+.pendiente {
+  background-color: #FEF9E7;
+  color: #8D6E63;
+}

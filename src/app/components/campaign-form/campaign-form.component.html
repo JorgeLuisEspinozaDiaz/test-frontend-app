@@ -1,0 +1,128 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrar Campaña</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+      <form #campaignForm="ngForm">
+        <div class="modal-body d-flex flex-column gap-1">
+          <!-- Usuario -->
+          <select
+            class="form-select"
+            [(ngModel)]="campaignData.usuarioId"
+            name="usuarioId"
+            #usuarioId="ngModel"
+            required
+            [ngClass]="{'is-invalid': usuarioId.invalid && usuarioId.touched}"
+
+          >
+            <option value="" disabled selected>Seleccione un usuario</option>
+            <option *ngFor="let user of users" [value]="user.id">
+              {{ user.username }}
+            </option>
+          </select>
+          <div *ngIf="usuarioId.invalid && usuarioId.touched" class="text-danger small">
+            Usuario es requerido.
+          </div>
+
+          <!-- Nombre de la Campaña -->
+          <div class="mb-0">
+            <label class="form-label m-0" style="font-size: 0.8rem">Nombre Campaña:</label>
+            <input
+              type="text"
+              class="form-control"
+              name="nombreCampana"
+              [(ngModel)]="campaignData.nombreCampana"
+              #nombreCampana="ngModel"
+              required
+              [ngClass]="{'is-invalid': nombreCampana.invalid && nombreCampana.touched}"
+
+            />
+            <div *ngIf="nombreCampana.invalid && nombreCampana.touched" class="text-danger small">
+              Nombre de campaña es requerido.
+            </div>
+          </div>
+
+          <!-- Fecha de Procesamiento -->
+          <div class="mt-0">
+            <label class="form-label small-text m-0" style="font-size: 0.8rem">Fecha de Procesamiento:</label>
+            <input
+              type="date"
+              class="form-control"
+              name="fechaProcesamiento"
+              [(ngModel)]="campaignData.fechaProcesamiento"
+              #fechaProcesamiento="ngModel"
+              required
+              [ngClass]="{'is-invalid': fechaProcesamiento.invalid && fechaProcesamiento.touched}"
+
+            />
+            <div *ngIf="fechaProcesamiento.invalid && fechaProcesamiento.touched" class="text-danger small">
+              Fecha de procesamiento es requerida.
+            </div>
+          </div>
+
+          <!-- Hora de Procesamiento -->
+          <div class="mt-0">
+            <label class="form-label small-text m-0" style="font-size: 0.8rem">Hora de Procesamiento:</label>
+            <input
+              type="time"
+              class="form-control"
+              name="horaProcesamiento"
+              [(ngModel)]="campaignData.horaProcesamiento"
+              #horaProcesamiento="ngModel"
+              required
+              [ngClass]="{'is-invalid': horaProcesamiento.invalid && horaProcesamiento.touched}"
+
+            />
+            <div *ngIf="horaProcesamiento.invalid && horaProcesamiento.touched" class="text-danger small">
+              Hora de procesamiento es requerida.
+            </div>
+          </div>
+
+          <!-- Números de Teléfonos -->
+          <div class="mb-0">
+            <label class="form-label m-0" style="font-size: 0.8rem">Número de Teléfonos:</label>
+            <textarea
+              class="form-control"
+              name="numeroTelefonos"
+              [(ngModel)]="campaignData.numeroTelefonos"
+              #numeroTelefonos="ngModel"
+              required
+              [ngClass]="{'is-invalid': numeroTelefonos.invalid && numeroTelefonos.touched}"
+
+            ></textarea>
+            <div *ngIf="numeroTelefonos.invalid && numeroTelefonos.touched" class="text-danger small">
+              Al menos un número de teléfono es requerido.
+            </div>
+          </div>
+
+          <!-- Mensaje de Texto -->
+          <div class="mb-0">
+            <label class="form-label m-0" style="font-size: 0.8rem">Mensaje de texto:</label>
+            <textarea
+              class="form-control"
+              name="mensajeTexto"
+              [(ngModel)]="campaignData.mensajeTexto"
+              #mensajeTexto="ngModel"
+              required
+              [ngClass]="{'is-invalid':mensajeTexto.invalid && mensajeTexto.touched}"
+
+            ></textarea>
+            <div *ngIf="mensajeTexto.invalid && mensajeTexto.touched" class="text-danger small">
+              Mensaje de texto es requerido.
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="modal-footer">
+          <button class="btn btn-danger" type="button" (click)="closeModal()">Cerrar</button>
+
+          <button class="btn btn-primary" [disabled]="campaignForm.invalid" (click)="submitCampaign()">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

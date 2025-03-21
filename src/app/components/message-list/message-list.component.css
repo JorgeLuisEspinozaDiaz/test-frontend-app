@@ -1,0 +1,36 @@
+.small-text {
+  font-size: 12px;
+}
+
+.estado {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+  min-width: 100px;
+}
+
+.enviado {
+  background-color: #EADCFB;
+  color: #7D3C98;
+}
+
+.error {
+  background-color: #F8D7DA;
+  color: #D32F2F;
+}
+
+.pendiente {
+  background-color: #FEF9E7;
+  color: #8D6E63;
+}
+th {
+  text-align: center;
+  vertical-align: middle; /* Alineación vertical */
+}
+.small-text {
+  text-align: center;
+  vertical-align: middle;
+}
