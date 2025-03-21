@@ -43,3 +43,6 @@ Si deseas generar una versión optimizada para producción, ejecuta:
 
 ## Despliegue
 Para desplegar la aplicación en un servidor web, sube el contenido generado en la carpeta `dist/` a tu hosting o servidor.
+
+📌 **La aplicación ya está desplegada en:** [https://pruebafronte.netlify.app/](https://pruebafronte.netlify.app/)
+
